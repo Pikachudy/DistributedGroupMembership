@@ -9,17 +9,20 @@ import gossip.serializer.Serializer;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.core.logging.Logger;
-import io.vertx.core.logging.LoggerFactory;
 import lombok.Data;
 
+import java.io.IOException;
 import java.net.UnknownHostException;
+import java.text.MessageFormat;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 
 /**
@@ -30,7 +33,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 @Data
 public class GossipManager {
-    private static final Logger LOGGER = LoggerFactory.getLogger(GossipManager.class);
+    private static final Logger LOGGER = Logger.getLogger(GossipManager.class.getName());
     private static final GossipManager instance = new GossipManager();
     private final ReentrantReadWriteLock rwlock = new ReentrantReadWriteLock();
     private final ScheduledExecutorService doGossipExecutor = Executors.newScheduledThreadPool(1);
@@ -53,7 +56,7 @@ public class GossipManager {
         return instance;
     }
 
-    public void init(String cluster, String ipAddress, Integer port, String id, List<SeedMember> seedMembers, GossipSettings settings, GossipListener listener) {
+    public void init(String cluster, String ipAddress, Integer port, String id, List<SeedMember> seedMembers, GossipSettings settings, GossipListener listener) throws IOException {
         this.cluster = cluster;
         this.localGossipMember = new GossipMember();
         this.localGossipMember.setCluster(cluster);
@@ -65,6 +68,19 @@ public class GossipManager {
         this.listener = listener;
         this.settings = settings;
         this.settings.setSeedMembers(seedMembers);
+        this.LOGGER.setUseParentHandlers(false);
+        try {
+            String filePath = MessageFormat.format(getSettings().getLOG_PATH(), cluster, this.localGossipMember.getId().replace(":", "_"));
+            // 判断文件是否存在,若不存在则新建
+            if(!new java.io.File(filePath).exists()){
+                new java.io.File(filePath).createNewFile();
+            }
+            FileHandler fileHandler = new FileHandler(filePath);
+            fileHandler.setFormatter(new SimpleFormatter());
+            this.LOGGER.addHandler(fileHandler);
+        } catch (SecurityException e) {
+            throw new RuntimeException(e);
+        }
         fireGossipEvent(localGossipMember, GossipState.JOIN);
     }
 
@@ -175,7 +191,7 @@ public class GossipManager {
                     remoteStateReplaceLocalState(m, remoteState);
                 }
             } catch (Exception e) {
-                LOGGER.error(e.getMessage());
+                LOGGER.severe(e.getMessage());
             }
         }
     }
@@ -278,7 +294,7 @@ public class GossipManager {
                 settings.getMsgService().sendMsg(target.getIpAddress(), target.getPort(), buffer);
                 return settings.getSeedMembers().contains(gossipMember2SeedMember(target));
             } catch (Exception e) {
-                LOGGER.error(e.getMessage());
+                LOGGER.severe(e.getMessage());
             }
         }
         return false;
@@ -299,7 +315,7 @@ public class GossipManager {
                 settings.getMsgService().sendMsg(target.getIpAddress(), target.getPort(), buffer);
                 return true;
             } catch (Exception e) {
-                LOGGER.error(e.getMessage());
+                LOGGER.severe(e.getMessage());
             }
         }
         return false;
@@ -334,7 +350,7 @@ public class GossipManager {
             }
             checkCandidate();
         } catch (Exception e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.severe(e.getMessage());
         }
     }
 
@@ -377,9 +393,9 @@ public class GossipManager {
     public void fireGossipEvent(GossipMember member, GossipState state, Object payload) {
         if (getListener() != null) {
             if (state == GossipState.RCV) {
-                new Thread(() -> getListener().gossipEvent(member, state, payload)).start();
+                new Thread(() -> getListener().gossipEvent(member, state, payload, this)).start();
             } else {
-                getListener().gossipEvent(member, state, payload);
+                getListener().gossipEvent(member, state, payload, this );
             }
         }
     }
@@ -395,7 +411,7 @@ public class GossipManager {
             }
             fireGossipEvent(member, GossipState.DOWN);
         } catch (Exception e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.severe(e.getMessage());
         } finally {
             rwlock.writeLock().unlock();
         }
@@ -403,24 +419,36 @@ public class GossipManager {
 
     private void up(GossipMember member) {
         try {
+            boolean isMeet = false;
             rwlock.writeLock().lock();
             member.setState(GossipState.UP);
             if (!liveMembers.contains(member)) {
                 liveMembers.add(member);
+                isMeet = true;
             }
             if (candidateMembers.containsKey(member)) {
                 candidateMembers.remove(member);
             }
             if (deadMembers.contains(member)) {
+                // 重新上线
                 deadMembers.remove(member);
-                LOGGER.info("节点加入！！");
+                LOGGER.info("节点上线！！");
                 if (!member.equals(getSelf())) {
                     fireGossipEvent(member, GossipState.UP);
                 }
             }
+            else {
+                if(isMeet) {
+                    // 首次加入
+                    LOGGER.info("节点加入！！");
+                    if (!member.equals(getSelf())) {
+                        fireGossipEvent(member, GossipState.MEET);
+                    }
+                }
+            }
 
         } catch (Exception e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.severe(e.getMessage());
         } finally {
             rwlock.writeLock().unlock();
         }
@@ -441,7 +469,7 @@ public class GossipManager {
                 candidateMembers.put(member, new CandidateMemberState(state.getHeartbeatTime()));
             }
         } catch (Exception e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.severe(e.getMessage());
         }
     }
 
@@ -475,6 +503,20 @@ public class GossipManager {
         settings.getMessageManager().add(msg);
     }
 
+    public void showDigests() {
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println("当前节点 :\n\t" + getSelf());
+        System.out.println("活跃节点 :" );
+        for(GossipMember member : getLiveMembers()) {
+            System.out.println("\t"+member);
+        }
+        System.out.println("死亡节点 :");
+        for(GossipMember member : getDeadMembers()) {
+            System.out.println("\t"+member);
+        }
+        System.out.println("------------------------------------------------------------------------------\n");
+
+    }
     class GossipTask implements Runnable {
 
         @Override
@@ -484,10 +526,9 @@ public class GossipManager {
             if (isDiscoverable(getSelf())) {
                 up(getSelf());
             }
-            if (LOGGER.isTraceEnabled()) {
-                LOGGER.trace("同步数据");
-                LOGGER.trace(String.format("更新后的 heartbeat version为 %d", version));
-            }
+            LOGGER.info("同步数据");
+            LOGGER.info(String.format("更新后的 heartbeat version为 %d", version));
+
 
             List<GossipDigest> digests = new ArrayList<>();
             try {
@@ -497,10 +538,11 @@ public class GossipManager {
                     sendBuf(syncMessageBuffer);
                 }
                 checkStatus();
-                if (LOGGER.isTraceEnabled()) {
-                    LOGGER.trace("live member : " + getLiveMembers());
-                    LOGGER.trace("dead member : " + getDeadMembers());
-                    LOGGER.trace("endpoint : " + getEndpointMembers());
+                LOGGER.info("live member : " + getLiveMembers());
+                LOGGER.info("dead member : " + getDeadMembers());
+                LOGGER.info("endpoint : " + getEndpointMembers());
+                if(version == 2){
+                    showDigests(); //初始化打印信息
                 }
                 new Thread(() -> {
                     MessageManager mm = settings.getMessageManager();
@@ -520,7 +562,7 @@ public class GossipManager {
                     }
                 }).start();
             } catch (UnknownHostException e) {
-                LOGGER.error(e.getMessage());
+                LOGGER.severe(e.getMessage());
             }
 
         }

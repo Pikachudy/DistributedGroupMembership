@@ -22,7 +22,7 @@ public class GossipSettings {
     private int gossipInterval = 1000;
 
     //网络超时时间
-    private int networkDelay = 200;
+    private int networkDelay = 0;
 
     private UDPService msgService = new UDPService();
 
@@ -33,10 +33,7 @@ public class GossipSettings {
 
     private MessageManager messageManager = new MessageManager();
 
-    public void setGossipInterval(int gossipInterval) {
-        this.gossipInterval = gossipInterval;
-    }
-
+    private String LOG_PATH = "Server/src/main/java/log/{0}_{1}.log";
     public void setSeedMembers(List<SeedMember> seedMembers) {
         List<SeedMember> _seedMembers = new ArrayList<>();
         if (seedMembers != null && !seedMembers.isEmpty()) {

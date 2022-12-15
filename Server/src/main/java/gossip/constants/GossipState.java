@@ -7,7 +7,7 @@ package gossip.constants;
  * @date 2022/12/08
  */
 public enum GossipState {
-    UP("up"), DOWN("down"), JOIN("join"), RCV("receive");
+    MEET("meet"),UP("up"), DOWN("down"), JOIN("join"), RCV("receive");
 
     private final String state;
 

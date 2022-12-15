@@ -3,6 +3,7 @@ package gossip.listener;
 
 import gossip.constants.GossipState;
 import gossip.entity.GossipMember;
+import gossip.manager.GossipManager;
 
 /**
  * 定义Gossip事件监听器
@@ -13,5 +14,5 @@ import gossip.entity.GossipMember;
  * @date 2022/12/11
  */
 public interface GossipListener {
-    void gossipEvent(GossipMember member, GossipState state, Object payload);
+    void gossipEvent(GossipMember member, GossipState state, Object payload, GossipManager selfManager);
 }
