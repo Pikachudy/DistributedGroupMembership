@@ -1,5 +1,3 @@
-import aboutClient.GlobalSetting;
-import aboutClient.UDPClientService;
 import gossip.constants.GossipSettings;
 import gossip.constants.GossipState;
 import gossip.entity.GossipMember;
@@ -10,14 +8,9 @@ import gossip.manager.GossipService;
 import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.FileHandler;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 /**
  * 普通节点服务入口
@@ -27,29 +20,8 @@ import java.util.logging.SimpleFormatter;
  */
 public class NodeMember {
     public static void main(String[] args) {
-
         int myPort = selectPort(1201);
         String cluster = GlobalSetting.CLUSTER;
-
-        Logger LOGGER = Logger.getLogger(NodeMember.class.getName()+":"+myPort);
-        String filePath = "Server/src/main/java/log/Event_"+cluster+"_"+myPort+".log";
-        // 判断文件是否存在,若不存在则新建
-        if(!new java.io.File(filePath).exists()){
-            try {
-                new java.io.File(filePath).createNewFile();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        FileHandler fileHandler = null;
-        try {
-            fileHandler = new FileHandler(filePath);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        fileHandler.setFormatter(new SimpleFormatter());
-        LOGGER.setUseParentHandlers(false);
-        LOGGER.addHandler(fileHandler);
 
         GossipSettings settings = new GossipSettings();
         GossipService gossipService = null;
@@ -59,7 +31,7 @@ public class NodeMember {
             SeedMember seed = new SeedMember(cluster,GlobalSetting.INTRODUCER_IP,GlobalSetting.INTRODUCER_PORT,null);
             seedNodes.add(seed);
             gossipService = new GossipService(cluster, myIpAddress, myPort, null, seedNodes, settings, (member, state, payload, selfManager) -> {
-                eventHandle(member, state, payload, selfManager, LOGGER, filePath);
+                eventHandle(member, state, payload, selfManager);
             });
         } catch (Exception e) {
             e.printStackTrace();
@@ -68,26 +40,21 @@ public class NodeMember {
         Thread thread = new Thread(new Introducer.listenConsoleOp(gossipService));
         thread.start();
     }
-    static void eventHandle(GossipMember member, GossipState state, Object payload, GossipManager selfManager,Logger LOGGER,String filePath) {
+    static void eventHandle(GossipMember member, GossipState state, Object payload, GossipManager selfManager) {
         if (state == GossipState.MEET){
             System.out.println("["+"\033[32;1m"+"新结点:"+ member + "加入!!!"+"\033[0m" + "]");
             selfManager.showDigests();
-            LOGGER.info("[新结点:"+ member + "加入!!!]");
         }
         if (state == GossipState.RCV) {
-            UDPClientService udpClientService = new UDPClientService(selfManager,filePath);
-            List<String> argList = List.of(payload.toString().split("-"));
-            udpClientService.queryHandler(argList.get(0),argList.get(1), Integer.parseInt(argList.get(2)));
+            System.out.println("成员:" + member + "  状态: " + state + " 数据: " + payload);
         }
         if (state == GossipState.DOWN) {
             System.out.println("["+"\033[31;1m"+"结点:" + member + "已经下线!!! "+"\033[0m"+ "]");
             selfManager.showDigests();
-            LOGGER.info("[结点:" + member + "已经下线!!! ]");
         }
         if( state == GossipState.UP){
             System.out.println("["+"\033[36;1m"+"结点:" + member + "重新上线!!! "+" \033[0m"+ "]");
             selfManager.showDigests();
-            LOGGER.info("[结点:" + member + "重新上线!!! ]");
         }
     }
 
@@ -133,9 +100,7 @@ public class NodeMember {
             }
             System.out.println("服务已关闭");
             System.out.println(this.service.getGossipManager().getSelf()+"已下线");
-
             System.exit(0);
         }
     }
-
 }
