@@ -1,0 +1,134 @@
+12月 15, 2022 3:34:39 下午 gossip.manager.GossipManager start
+信息: 正在开启服务…… cluster[Pikachudy] ip[100.80.25.25] port[5001] id[100.80.25.25:5001]
+12月 15, 2022 3:34:40 下午 gossip.manager.GossipManager up
+信息: 节点加入！！
+12月 15, 2022 3:34:40 下午 gossip.manager.GossipManager$GossipTask run
+信息: 同步数据
+12月 15, 2022 3:34:40 下午 gossip.manager.GossipManager$GossipTask run
+信息: 更新后的 heartbeat version为 1
+12月 15, 2022 3:34:41 下午 gossip.manager.GossipManager$GossipTask run
+信息: live member : [GossipMember{cluster='Pikachudy', ipAddress='100.80.25.25', port=5001, id='100.80.25.25:5001', state=UP}]
+12月 15, 2022 3:34:41 下午 gossip.manager.GossipManager$GossipTask run
+信息: dead member : []
+12月 15, 2022 3:34:41 下午 gossip.manager.GossipManager$GossipTask run
+信息: endpoint : {GossipMember{cluster='Pikachudy', ipAddress='100.80.25.25', port=5001, id='100.80.25.25:5001', state=UP}=HeartbeatState{heartbeatTime=1671089680930, version=1}}
+12月 15, 2022 3:34:41 下午 gossip.manager.GossipManager$GossipTask run
+信息: 同步数据
+12月 15, 2022 3:34:41 下午 gossip.manager.GossipManager$GossipTask run
+信息: 更新后的 heartbeat version为 2
+12月 15, 2022 3:34:41 下午 gossip.manager.GossipManager$GossipTask run
+信息: live member : [GossipMember{cluster='Pikachudy', ipAddress='100.80.25.25', port=5001, id='100.80.25.25:5001', state=UP}]
+12月 15, 2022 3:34:41 下午 gossip.manager.GossipManager$GossipTask run
+信息: dead member : []
+12月 15, 2022 3:34:41 下午 gossip.manager.GossipManager$GossipTask run
+信息: endpoint : {GossipMember{cluster='Pikachudy', ipAddress='100.80.25.25', port=5001, id='100.80.25.25:5001', state=UP}=HeartbeatState{heartbeatTime=1671089681928, version=2}}
+12月 15, 2022 3:34:42 下午 gossip.manager.GossipManager$GossipTask run
+信息: 同步数据
+12月 15, 2022 3:34:42 下午 gossip.manager.GossipManager$GossipTask run
+信息: 更新后的 heartbeat version为 3
+12月 15, 2022 3:34:42 下午 gossip.manager.GossipManager$GossipTask run
+信息: live member : [GossipMember{cluster='Pikachudy', ipAddress='100.80.25.25', port=5001, id='100.80.25.25:5001', state=UP}]
+12月 15, 2022 3:34:42 下午 gossip.manager.GossipManager$GossipTask run
+信息: dead member : []
+12月 15, 2022 3:34:42 下午 gossip.manager.GossipManager$GossipTask run
+信息: endpoint : {GossipMember{cluster='Pikachudy', ipAddress='100.80.25.25', port=5001, id='100.80.25.25:5001', state=UP}=HeartbeatState{heartbeatTime=1671089682924, version=3}}
+12月 15, 2022 3:34:43 下午 gossip.manager.GossipManager$GossipTask run
+信息: 同步数据
+12月 15, 2022 3:34:43 下午 gossip.manager.GossipManager$GossipTask run
+信息: 更新后的 heartbeat version为 4
+12月 15, 2022 3:34:43 下午 gossip.manager.GossipManager$GossipTask run
+信息: live member : [GossipMember{cluster='Pikachudy', ipAddress='100.80.25.25', port=5001, id='100.80.25.25:5001', state=UP}]
+12月 15, 2022 3:34:43 下午 gossip.manager.GossipManager$GossipTask run
+信息: dead member : []
+12月 15, 2022 3:34:43 下午 gossip.manager.GossipManager$GossipTask run
+信息: endpoint : {GossipMember{cluster='Pikachudy', ipAddress='100.80.25.25', port=5001, id='100.80.25.25:5001', state=UP}=HeartbeatState{heartbeatTime=1671089683931, version=4}}
+12月 15, 2022 3:34:44 下午 gossip.manager.GossipManager$GossipTask run
+信息: 同步数据
+12月 15, 2022 3:34:44 下午 gossip.manager.GossipManager$GossipTask run
+信息: 更新后的 heartbeat version为 5
+12月 15, 2022 3:34:44 下午 gossip.manager.GossipManager$GossipTask run
+信息: live member : [GossipMember{cluster='Pikachudy', ipAddress='100.80.25.25', port=5001, id='100.80.25.25:5001', state=UP}]
+12月 15, 2022 3:34:44 下午 gossip.manager.GossipManager$GossipTask run
+信息: dead member : []
+12月 15, 2022 3:34:44 下午 gossip.manager.GossipManager$GossipTask run
+信息: endpoint : {GossipMember{cluster='Pikachudy', ipAddress='100.80.25.25', port=5001, id='100.80.25.25:5001', state=UP}=HeartbeatState{heartbeatTime=1671089684931, version=5}}
+12月 15, 2022 3:34:45 下午 gossip.manager.GossipManager$GossipTask run
+信息: 同步数据
+12月 15, 2022 3:34:45 下午 gossip.manager.GossipManager$GossipTask run
+信息: 更新后的 heartbeat version为 6
+12月 15, 2022 3:34:45 下午 gossip.manager.GossipManager$GossipTask run
+信息: live member : [GossipMember{cluster='Pikachudy', ipAddress='100.80.25.25', port=5001, id='100.80.25.25:5001', state=UP}]
+12月 15, 2022 3:34:45 下午 gossip.manager.GossipManager$GossipTask run
+信息: dead member : []
+12月 15, 2022 3:34:45 下午 gossip.manager.GossipManager$GossipTask run
+信息: endpoint : {GossipMember{cluster='Pikachudy', ipAddress='100.80.25.25', port=5001, id='100.80.25.25:5001', state=UP}=HeartbeatState{heartbeatTime=1671089685923, version=6}}
+12月 15, 2022 3:34:46 下午 gossip.manager.GossipManager$GossipTask run
+信息: 同步数据
+12月 15, 2022 3:34:46 下午 gossip.manager.GossipManager$GossipTask run
+信息: 更新后的 heartbeat version为 7
+12月 15, 2022 3:34:46 下午 gossip.manager.GossipManager$GossipTask run
+信息: live member : [GossipMember{cluster='Pikachudy', ipAddress='100.80.25.25', port=5001, id='100.80.25.25:5001', state=UP}]
+12月 15, 2022 3:34:46 下午 gossip.manager.GossipManager$GossipTask run
+信息: dead member : []
+12月 15, 2022 3:34:46 下午 gossip.manager.GossipManager$GossipTask run
+信息: endpoint : {GossipMember{cluster='Pikachudy', ipAddress='100.80.25.25', port=5001, id='100.80.25.25:5001', state=UP}=HeartbeatState{heartbeatTime=1671089686933, version=7}}
+12月 15, 2022 3:34:47 下午 gossip.manager.GossipManager$GossipTask run
+信息: 同步数据
+12月 15, 2022 3:34:47 下午 gossip.manager.GossipManager$GossipTask run
+信息: 更新后的 heartbeat version为 8
+12月 15, 2022 3:34:47 下午 gossip.manager.GossipManager$GossipTask run
+信息: live member : [GossipMember{cluster='Pikachudy', ipAddress='100.80.25.25', port=5001, id='100.80.25.25:5001', state=UP}]
+12月 15, 2022 3:34:47 下午 gossip.manager.GossipManager$GossipTask run
+信息: dead member : []
+12月 15, 2022 3:34:47 下午 gossip.manager.GossipManager$GossipTask run
+信息: endpoint : {GossipMember{cluster='Pikachudy', ipAddress='100.80.25.25', port=5001, id='100.80.25.25:5001', state=UP}=HeartbeatState{heartbeatTime=1671089687930, version=8}}
+12月 15, 2022 3:34:48 下午 gossip.manager.GossipManager$GossipTask run
+信息: 同步数据
+12月 15, 2022 3:34:48 下午 gossip.manager.GossipManager$GossipTask run
+信息: 更新后的 heartbeat version为 9
+12月 15, 2022 3:34:48 下午 gossip.manager.GossipManager$GossipTask run
+信息: live member : [GossipMember{cluster='Pikachudy', ipAddress='100.80.25.25', port=5001, id='100.80.25.25:5001', state=UP}]
+12月 15, 2022 3:34:48 下午 gossip.manager.GossipManager$GossipTask run
+信息: dead member : []
+12月 15, 2022 3:34:48 下午 gossip.manager.GossipManager$GossipTask run
+信息: endpoint : {GossipMember{cluster='Pikachudy', ipAddress='100.80.25.25', port=5001, id='100.80.25.25:5001', state=UP}=HeartbeatState{heartbeatTime=1671089688926, version=9}}
+12月 15, 2022 3:34:49 下午 gossip.manager.GossipManager$GossipTask run
+信息: 同步数据
+12月 15, 2022 3:34:49 下午 gossip.manager.GossipManager$GossipTask run
+信息: 更新后的 heartbeat version为 10
+12月 15, 2022 3:34:49 下午 gossip.manager.GossipManager$GossipTask run
+信息: live member : [GossipMember{cluster='Pikachudy', ipAddress='100.80.25.25', port=5001, id='100.80.25.25:5001', state=UP}]
+12月 15, 2022 3:34:49 下午 gossip.manager.GossipManager$GossipTask run
+信息: dead member : []
+12月 15, 2022 3:34:49 下午 gossip.manager.GossipManager$GossipTask run
+信息: endpoint : {GossipMember{cluster='Pikachudy', ipAddress='100.80.25.25', port=5001, id='100.80.25.25:5001', state=UP}=HeartbeatState{heartbeatTime=1671089689936, version=10}}
+12月 15, 2022 3:34:50 下午 gossip.manager.GossipManager$GossipTask run
+信息: 同步数据
+12月 15, 2022 3:34:50 下午 gossip.manager.GossipManager$GossipTask run
+信息: 更新后的 heartbeat version为 11
+12月 15, 2022 3:34:50 下午 gossip.manager.GossipManager$GossipTask run
+信息: live member : [GossipMember{cluster='Pikachudy', ipAddress='100.80.25.25', port=5001, id='100.80.25.25:5001', state=UP}]
+12月 15, 2022 3:34:50 下午 gossip.manager.GossipManager$GossipTask run
+信息: dead member : []
+12月 15, 2022 3:34:50 下午 gossip.manager.GossipManager$GossipTask run
+信息: endpoint : {GossipMember{cluster='Pikachudy', ipAddress='100.80.25.25', port=5001, id='100.80.25.25:5001', state=UP}=HeartbeatState{heartbeatTime=1671089690930, version=11}}
+12月 15, 2022 3:34:51 下午 gossip.manager.GossipManager$GossipTask run
+信息: 同步数据
+12月 15, 2022 3:34:51 下午 gossip.manager.GossipManager$GossipTask run
+信息: 更新后的 heartbeat version为 12
+12月 15, 2022 3:34:51 下午 gossip.manager.GossipManager$GossipTask run
+信息: live member : [GossipMember{cluster='Pikachudy', ipAddress='100.80.25.25', port=5001, id='100.80.25.25:5001', state=UP}]
+12月 15, 2022 3:34:51 下午 gossip.manager.GossipManager$GossipTask run
+信息: dead member : []
+12月 15, 2022 3:34:51 下午 gossip.manager.GossipManager$GossipTask run
+信息: endpoint : {GossipMember{cluster='Pikachudy', ipAddress='100.80.25.25', port=5001, id='100.80.25.25:5001', state=UP}=HeartbeatState{heartbeatTime=1671089691927, version=12}}
+12月 15, 2022 3:34:52 下午 gossip.manager.GossipManager$GossipTask run
+信息: 同步数据
+12月 15, 2022 3:34:52 下午 gossip.manager.GossipManager$GossipTask run
+信息: 更新后的 heartbeat version为 13
+12月 15, 2022 3:34:52 下午 gossip.manager.GossipManager$GossipTask run
+信息: live member : [GossipMember{cluster='Pikachudy', ipAddress='100.80.25.25', port=5001, id='100.80.25.25:5001', state=UP}]
+12月 15, 2022 3:34:52 下午 gossip.manager.GossipManager$GossipTask run
+信息: dead member : []
+12月 15, 2022 3:34:52 下午 gossip.manager.GossipManager$GossipTask run
+信息: endpoint : {GossipMember{cluster='Pikachudy', ipAddress='100.80.25.25', port=5001, id='100.80.25.25:5001', state=UP}=HeartbeatState{heartbeatTime=1671089692924, version=13}}

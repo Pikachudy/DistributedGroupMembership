@@ -1,0 +1,12 @@
+Dec 17, 2022 1:58:08 AM NodeMember eventHandle
+INFO: [结点:GossipMember{cluster='Pikachudy', ipAddress='127.0.1.1', port=1206, id='127.0.1.1:1206', state=DOWN}已经下线!!! ]
+Dec 17, 2022 1:58:08 AM NodeMember eventHandle
+INFO: [新结点:GossipMember{cluster='Pikachudy', ipAddress='127.0.1.1', port=1203, id='127.0.1.1:1203', state=UP}加入!!!]
+Dec 17, 2022 1:58:08 AM NodeMember eventHandle
+INFO: [新结点:GossipMember{cluster='Pikachudy', ipAddress='127.0.1.1', port=1202, id='127.0.1.1:1202', state=UP}加入!!!]
+Dec 17, 2022 1:58:08 AM NodeMember eventHandle
+INFO: [新结点:GossipMember{cluster='Pikachudy', ipAddress='127.0.1.1', port=1201, id='127.0.1.1:1201', state=UP}加入!!!]
+Dec 17, 2022 1:58:08 AM NodeMember eventHandle
+INFO: [新结点:GossipMember{cluster='Pikachudy', ipAddress='127.0.1.1', port=1200, id='127.0.1.1:1200', state=UP}加入!!!]
+Dec 17, 2022 1:58:09 AM NodeMember eventHandle
+INFO: [新结点:GossipMember{cluster='Pikachudy', ipAddress='127.0.1.1', port=1204, id='127.0.1.1:1204', state=UP}加入!!!]
